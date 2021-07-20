@@ -147,7 +147,6 @@ class HyNet(nn.Module):
         )
 
     def forward(self, x, mode='eval'):
-
         for layer in [self.layer1, self.layer2, self.layer3, self.layer4, self.layer5, self.layer6]:
             x = layer(x)
         desc_raw = self.layer7(x).squeeze()
