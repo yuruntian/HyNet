@@ -1,4 +1,3 @@
-
 import torch
 import torch.nn as nn
 eps_l2_norm = 1e-10
@@ -97,7 +96,7 @@ class TLU(nn.Module):
         return torch.max(x, self.tau)
 
 class HyNet(nn.Module):
-    """DescNet model definition
+    """HyNet model definition
     """
     def __init__(self, is_bias=True, is_bias_FRN=True, dim_desc=128, drop_rate=0.2):
         super(HyNet, self).__init__()
