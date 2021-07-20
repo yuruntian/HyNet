@@ -160,7 +160,7 @@ class HyNet(nn.Module):
 
 
 class L2Net(nn.Module):
-    """DescNet model definition
+    """L2Net model definition
     """
     def __init__(self, is_bias=False, is_affine=False, dim_desc=128, drop_rate=0.3):
         super(L2Net, self).__init__()
