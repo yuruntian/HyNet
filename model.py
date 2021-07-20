@@ -2,12 +2,10 @@ import torch
 import torch.nn as nn
 eps_l2_norm = 1e-10
 
-
 def desc_l2norm(desc):
     '''descriptors with shape NxC or NxCxHxW'''
     desc = desc / desc.pow(2).sum(dim=1, keepdim=True).add(eps_l2_norm).pow(0.5)
     return desc
-
 
 class FRN(nn.Module):
     def __init__(self, num_features, eps=1e-6, is_bias=True, is_scale=True, is_eps_leanable=False):
@@ -15,11 +13,6 @@ class FRN(nn.Module):
         FRN layer as in the paper
         Filter Response Normalization Layer: Eliminating Batch Dependence in the Training of Deep Neural Networks'
         <https://arxiv.org/abs/1911.09737>
-
-        weight = gamma, bias = beta
-        beta, gamma:
-            Variables of shape [1, C, 1, 1]. if PyTorch
-        eps: A scalar constant or learnable variable.
         """
         super(FRN, self).__init__()
 
@@ -28,7 +21,6 @@ class FRN(nn.Module):
         self.is_eps_leanable = is_eps_leanable
         self.is_bias = is_bias
         self.is_scale = is_scale
-
 
         self.weight = nn.parameter.Parameter(torch.Tensor(1, num_features, 1, 1), requires_grad=True)
         self.bias = nn.parameter.Parameter(torch.Tensor(1, num_features, 1, 1), requires_grad=True)
@@ -48,16 +40,6 @@ class FRN(nn.Module):
         return 'num_features={num_features}, eps={init_eps}'.format(**self.__dict__)
 
     def forward(self, x):
-        """
-        0, 1, 2, 3 -> (B, H, W, C) in TensorFlow
-        0, 1, 2, 3 -> (B, C, H, W) in PyTorch
-        TensorFlow code
-            nu2 = tf.reduce_mean(tf.square(x), axis=[1, 2], keepdims=True)
-            x = x * tf.rsqrt(nu2 + tf.abs(eps))
-
-            # This Code include TLU function max(y, tau)
-            return tf.maximum(gamma * x + beta, tau)
-        """
         # Compute the mean norm of activations per channel.
         nu2 = x.pow(2).mean(dim=[2, 3], keepdim=True)
 
@@ -77,8 +59,6 @@ class TLU(nn.Module):
         TLU layer as in the paper
         Filter Response Normalization Layer: Eliminating Batch Dependence in the Training of Deep Neural Networks'
         <https://arxiv.org/abs/1911.09737>
-
-        max(y, tau) = max(y - tau, 0) + tau = ReLU(y - tau) + tau
         """
         super(TLU, self).__init__()
         self.num_features = num_features

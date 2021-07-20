@@ -294,8 +294,8 @@ def test_net(device, net, patch, pointID, index, dim_desc=128, sz_batch=500):
     return fpr95
 
 parser = argparse.ArgumentParser(description='pyTorch descNet')
-parser.add_argument('--data_root', type=str, default='yourpath')# path containing the UBC and HPatches data set
-parser.add_argument('--network_root', type=str, default='yourpath')# path containing the trained models
+parser.add_argument('--data_root', type=str, default='/home/yurun/Research/mydata')# path containing the UBC and HPatches data set
+parser.add_argument('--network_root', type=str, default='/home/yurun/Research/mydata')# path containing the trained models
 
 parser.add_argument('--train_set', type=str, default='liberty')# notredame, liberty, yosemite, hpatches,
 parser.add_argument('--train_split', type=str, default='a')# full
