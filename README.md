@@ -1,6 +1,6 @@
 # HyNet: Learning Local Descriptor with Hybrid Similarity Measure and Triplet Loss
 
-This a Pytorch implementation of our paper:
+This is a Pytorch implementation of our paper:
 
 **"HyNet: Learning Local Descriptor with Hybrid Similarity Measure and Triplet Loss"**   
 Yurun Tian, Axel Barroso-Laguna, Tony Ng, Vassileios Balntas, Krystian Mikolajczyk. NeurIPS 2020. [[arXiv](https://arxiv.org/abs/2006.10202)]
@@ -25,12 +25,12 @@ The downloaded data should be organised as the following folder structure:
 >
 >> -- hpatches-benchmark-master
 
-Specify the training data path and path saving path for the code:
+Specify the training data path and saving path for the code:
 ```
 python train.py --data_root=data_root --network_root= save_root
 ```
 
-- To accelerate the training, all the data needed will be generated and saved at the fist run. 
+- To accelerate the training, all the data needed will be generated and saved at the first run. 
 
 
 
