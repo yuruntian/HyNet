@@ -27,7 +27,7 @@ The downloaded data should be organised as the following folder structure:
 
 Specify the training data path and saving path for the code:
 ```
-python train.py --data_root=data_root --network_root= save_root
+python train.py --data_root=data_root --network_root=save_root
 ```
 
 - To accelerate the training, all the data needed will be generated and saved at the first run. 
